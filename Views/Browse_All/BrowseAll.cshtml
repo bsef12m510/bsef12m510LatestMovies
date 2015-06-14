@@ -1,0 +1,359 @@
+﻿@using Project.Models
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>All</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+ 
+    <link href="~/Content/full-slider.css" rel="stylesheet">
+    
+    <link href="~/Content/cols.css" rel="stylesheet">
+    <link href="~/Content/css2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="~/Scripts/jquery.js"></script>
+
+    <!-- Add mousewheel plugin (this is optional) -->
+    <script type="text/javascript" src="~/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="~/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="~/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+    <!-- Optionally add helpers - button, thumbnail and/or media -->
+    <link rel="stylesheet" href="~/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="~/fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+    <script type="text/javascript" src="~/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+
+    <link rel="stylesheet" href="~/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+    <script type="text/javascript" src="~/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+    @* <script type="text/javascript">
+            $(document).ready(function () {
+                $(".fancybox").fancybox();
+            });
+        </script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".fancybox").fancybox({
+                prevEffect: 'none',
+                nextEffect: 'none',
+                helpers: {
+                    title: {
+                        type: 'outside'
+                    },
+                    thumbs: {
+                        width: 50,
+                        height: 50
+                    }
+                }
+            });
+
+        });
+    </script>
+
+</head>
+
+
+<body style="background-image:url(/Content/images/bg.jpg)">
+
+    <div class="container" style="padding-top:15px">
+        <ul class="nav nav-tabs">
+      
+
+
+
+            @{
+                    
+                   
+                    foreach(var x in ViewBag.categories)
+                    {
+                        string myUrl = "/Browse_All/BrowseAll?entityType="+ ViewBag.entityType + "&genre=" + x.genre.Trim();
+                         if(ViewBag.genre==x.genre.Trim())
+                        { 
+                             <li class="active"><a href="@Url.Content(myUrl)">@x.genre.Trim()</a></li>
+                        }
+                        else
+                        { <li><a href="@Url.Content(myUrl)">@x.genre.Trim()</a></li>
+                        }
+                    }
+                
+            }
+        </ul>
+
+
+    </div>
+
+
+    <div class="container">
+        <!-- Page Heading -->
+        <div class="row carousel-holder" style="padding-top:10px">
+            <div class="col-md-12">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" style="max-height:75%">
+                        <div class="item active">
+                            @if(ViewBag.entityType=="movies")
+                            {
+                                <img class="slide-image" src="~/Content/images/inter.jpg" alt="">
+                            }
+                            else if(ViewBag.entityType=="seasons")
+                            {
+                                <img class="slide-image" src="~/Content/images/bb.png" alt="">
+                            }
+                            else if (ViewBag.entityType == "songs")
+                            {
+                                <img class="slide-image" src="~/Content/images/adele.jpg" alt="">
+                            }
+                            else
+                            {
+                                <img class="slide-image" src="~/Content/images/fifa.jpg" alt="">
+                            }
+                        </div>
+                        <div class="item">
+                            @if (ViewBag.entityType == "movies")
+                            {
+                                <img class="slide-image" src="~/Content/images/dr.jpg" alt="">
+                            }
+                            else if (ViewBag.entityType == "seasons")
+                            {
+                                <img class="slide-image" src="~/Content/images/vd.png" alt="">
+                            }
+                            else if (ViewBag.entityType == "songs")
+                            {
+                                <img class="slide-image" src="~/Content/images/enri.jpg" alt="">
+                            }
+                            else
+                            {
+                                <img class="slide-image" src="~/Content/images/call.jpg" alt="">
+                            }
+                        </div>
+                        <div class="item">
+                            @if (ViewBag.entityType == "movies")
+                            {
+                                <img class="slide-image" src="~/Content/images/steel.jpg" alt="">
+                            }
+                            else if (ViewBag.entityType == "seasons")
+                            {
+                                <img class="slide-image" src="~/Content/images/dex.jpg" alt="">
+                            }
+                            else if (ViewBag.entityType == "songs")
+                            {
+                                <img class="slide-image" src="~/Content/images/swift.jpg" alt="">
+                            }
+                            else
+                            {
+                                <img class="slide-image" src="~/Content/images/nfs.jpg" alt="">
+                            }
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- /.row -->
+        <!-- Projects Row -->
+       <div class="container-fluid">
+ 
+           <div class="row">
+               @{int count = 0;
+                if(ViewBag.entityType=="movies")
+                {    
+               foreach (Movie m in Model)
+               {
+                   string g = "gallery";
+                       <div class="col-md-3 portfolio-item">
+                           <a class="fancybox-thumb" rel="@(g+count)" href="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_1.jpg")" title="@m.title (Cast : @m.cast) ">
+                               <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_1.jpg")" alt="">
+                           </a>
+                           <div class="hidden">
+                               <a class="fancybox-thumb" rel="@(g+count)" href="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_2.jpg")" title="@m.title (Cast : @m.cast) ">
+                                   <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_2.jpg")" alt="">
+
+                               </a>
+                               <a class="fancybox-thumb" rel="@(g+count)" href="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_3.jpg")" title="@m.title (Cast : @m.cast)">
+                                   <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_3.jpg")" alt="">
+
+                               </a>
+                           </div>
+                           <div class="ratings">
+                               <a href='@string.Format("/Description/Desc?m={0}", m.id)'><h4>@m.title</h4></a>
+                               <p class="pull-right">@m.rating</p>
+                               <p>
+                                   @for (int i = 0; i < Convert.ToInt32(m.rating) / 2; i++)
+                                   {
+                                       <span class="glyphicon glyphicon-star"></span>
+                                   }
+                               </p>
+                           </div>
+                       </div>
+                                   count++;
+                   
+               }
+               }
+               else if(ViewBag.entityType=="seasons")
+                {
+                     foreach (Season s in Model)
+                     {
+                         string g = "s_gallery";
+                       <div class="col-md-3 portfolio-item">
+                           <a class="fancybox-thumb" rel="@(g)" href="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_1.jpg")" title="@s.title (Cast : @s.cast) ">
+                               <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_1.jpg")" alt="">
+                           </a>
+                           <div class="hidden">
+                               <a class="fancybox-thumb" rel="@(g)" href="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_2.jpg")" title="@s.title (Cast : @s.cast) ">
+                                   <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_2.jpg")" alt="">
+
+                               </a>
+                               <a class="fancybox-thumb" rel="@(g)" href="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_3.jpg")" title="@s.title (Cast : @s.cast)">
+                                   <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_3.jpg")" alt="">
+
+                               </a>
+                           </div>
+                           <div class="ratings">
+                               <a href='@string.Format("/Description/Desc_Season?s={0}", s.id)'><h4>@s.title</h4></a>
+                                   <p class="pull-right">@s.rating</p>
+                                   <p>
+                                       @for (int i = 0; i < Convert.ToInt32(s.rating) / 2; i++)
+                                       {
+                                           <span class="glyphicon glyphicon-star"></span>
+                                       }
+                                   </p>
+</div>
+                       </div>
+                                   count++;
+                   
+                      }
+                }
+                else if (ViewBag.entityType == "games")
+                {
+                    foreach (Game s in Model)
+                    {
+                        string g = "g_gallery";
+                       <div class="col-md-3 portfolio-item">
+                           <a class="fancybox-thumb" rel="@(g)" href="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_1.jpg")" title="@s.title ">
+                               <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_1.jpg")" alt="">
+                           </a>
+                           <div class="hidden">
+                               <a class="fancybox-thumb" rel="@(g)" href="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_2.jpg")" title="@s.title  ">
+                                   <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_2.jpg")" alt="">
+
+                               </a>
+                               <a class="fancybox-thumb" rel="@(g)" href="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_3.jpg")" title="@s.title ">
+                                   <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_3.jpg")" alt="">
+
+                               </a>
+                           </div>
+                           <div class="ratings">
+                               <a href='@string.Format("/Description/Desc_Game?s={0}", s.id)'> <h4>@s.title</h4></a>
+                               <p class="pull-right">@s.rating</p>
+                               <p>
+                                   @for (int i = 0; i < Convert.ToInt32(s.rating) / 20; i++)
+                                   {
+                                       <span class="glyphicon glyphicon-star"></span>
+                                   }
+                               </p>
+                           </div>
+                       </div>
+                                   count++;
+                   
+                      }
+                }
+                else
+                {
+                     foreach (Song s in Model)
+                     {
+                         string g = "so_gallery";
+                       <div class="col-md-3 portfolio-item">
+                           <a class="fancybox-thumb" rel="@(g)" href="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_1.jpg")" title="@s.title (@s.artist)">
+                               <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_1.jpg")" alt="">
+                           </a>
+                           <div class="hidden">
+                               <a class="fancybox-thumb" rel="@(g)" href="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_2.jpg")" title="@s.title (@s.artist) ">
+                                   <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_2.jpg")" alt="">
+
+                               </a>
+                               <a class="fancybox-thumb" rel="@(g)" href="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_3.jpg")" title="@s.title (@s.artist)">
+                                   <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_3.jpg")" alt="">
+
+                               </a>
+                           </div>
+                           <div class="ratings">
+                               <a href='@string.Format("/Description/Desc_Song?s={0}", s.id)'><h4>@s.title</h4></a>
+                             @*  <p class="pull-right">@s.rating</p>
+                               <p>
+                                   @for (int i = 0; i < Convert.ToInt32(s.rating) / 20; i++)
+                                   {
+                                       <span class="glyphicon glyphicon-star"></span>
+                                   }
+                               </p>*@
+                           </div>
+                       </div>
+                                   count++;
+                   
+                      }
+                }
+               
+               }
+           </div>
+
+
+
+            <!-- Pagination -->
+            @*<div class="row text-center">
+                <div class="col-lg-12">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#">&laquo;</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">1</a>
+                        </li>
+                        <li>
+                            <a href="#">2</a>
+                        </li>
+                        <li>
+                            <a href="#">3</a>
+                        </li>
+                        <li>
+                            <a href="#">4</a>
+                        </li>
+                        <li>
+                            <a href="#">5</a>
+                        </li>
+                        <li>
+                            <a href="#">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>*@
+            <!-- /.row -->
+       
+    </div>
+    <!-- /.container -->
+    <!-- jQuery -->
+    @*<script src="~/js/jquery.js"></script>
+    
+    <script src="~/js/bootstrap.min.js"></script>*@
+    
+
+</body>
+</html>

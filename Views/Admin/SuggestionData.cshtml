@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/Admin/Layout.cshtml";
+}
+@using Project.Models
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SuggestionData</title>
+</head>
+<body>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box-large">
+                    <div class="panel-heading">
+                        <div class="panel-title">Users</div>
+                        @{
+                            string url = "/Admin/DeleteSuggestion/";
+                        }
+                        @*<div class="panel-options">
+                            <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+                            <a href="/Admin/DataOperations" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+                        </div>*@
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Username</th>
+                                        <th>Title</th>
+                                        <th>Suggestion</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Suggestion s in Model)
+                                    {
+                                        <tr>
+                                            <td>@s.id</td>
+                                            <td>@s.username</td>
+                                            <td>@s.title</td>
+                                            <td data-toggle="tooltip" title="@s.suggestion" class="col-md-2" style="text-overflow :ellipsis; white-space: nowrap; overflow: hidden; max-width: 40px;">@s.suggestion</td>
+                                            <td>@s.time</td>
+                                            <td>
+
+                                                <a href="@Url.Content(url+s.id)" data-rel="reload"><i class="glyphicon glyphicon-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

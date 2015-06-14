@@ -1,0 +1,323 @@
+﻿@{
+    ViewBag.Title = "Advanced";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Project.Models
+<body style="background-image:url(/Content/images/bg.jpg)">
+
+     <div class="container-fluid">
+        @if (Model is IEnumerable<Movie>)
+        {
+            int j = 0;
+        <div class="row">
+            
+            @{
+                    foreach (Movie m in Model)
+                    {
+                        if(j==0)
+                    { <ul class="nav nav-tabs" style="margin-top: 2%; margin-bottom: 2%">
+            <li><h4 style="color:#337AB7"><strong>MOVIES</strong></h4></li>
+
+        </ul>}
+                         string g = "gallery";
+            <div class="col-md-3 portfolio-item">
+               
+                <a class="fancybox-thumb" rel="@(g+"m_"+m.id)" href="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_1.jpg")" title="@m.title (@m.cast)">
+                    <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_1.jpg")" alt="">
+                </a>
+                    <div class="hidden">
+                        <a class="fancybox-thumb" rel="@(g + "m_" + m.id)" href="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_2.jpg")" title="@m.title (@m.cast)">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_2.jpg")" alt="">
+
+                        </a>
+                        <a class="fancybox-thumb" rel="@(g + "m_" + m.id)" href="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_3.jpg")" title="@m.title (@m.cast)">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/m_"+m.title.Trim()+"_img_3.jpg")" alt="">
+
+                        </a>
+                    </div>
+              
+                <div class="ratings">
+                    <a href='@string.Format("/Description/Desc?m={0}", m.id)'><h4>@m.title</h4></a>
+                    <p class="pull-right">@m.rating</p>
+                    <p>
+                        @for (int i = 0; i < Convert.ToInt32(m.rating) / 2; i++)
+                        {
+                            <span class="glyphicon glyphicon-star"></span>
+                        }
+                    </p>
+                </div>
+            </div>
+
+                        j++;
+                    }
+                
+            }
+        </div>
+        
+        }
+        
+         @if(Model is IEnumerable<Season> || ViewBag.entity=="All")
+         {
+             int j = 0;
+             @*<ul class="nav nav-tabs" style="margin-top:2%">
+            <li><h4 style="color:#337AB7"><strong>SEASONS</strong></h4></li>
+
+        </ul>*@
+        <div class="row">
+
+            @{
+                if(ViewBag.season!=null)
+                {   foreach (Season s in ViewBag.season)
+                    {
+                    if(j==0)
+                    { <ul class="nav nav-tabs" style="margin-top: 2%; margin-bottom: 2%">
+            <li><h4 style="color:#337AB7"><strong>SEASONS</strong></h4></li>
+
+        </ul>}
+                        string g = "gallery";
+            <div class="col-md-3 portfolio-item">
+               
+                <a class="fancybox-thumb" rel="@(g+"s_"+s.id)" href="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_1.jpg")" title="@s.title (@s.cast)">
+                    <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_1.jpg")" alt="">
+                </a>
+                    <div class="hidden">
+                        <a class="fancybox-thumb" rel="@(g + "s_" + s.id)" href="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_2.jpg")" title="@s.title (@s.cast)">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_2.jpg")" alt="">
+
+                        </a>
+                        <a class="fancybox-thumb" rel="@(g + "s_" + s.id)" href="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_3.jpg")" title="@s.title (@s.cast)">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_3.jpg")" alt="">
+
+                        </a>
+                    </div>
+                            <div class="ratings">
+                                <a href='@string.Format("/Description/Desc_Season?s={0}", s.id)'><h4>@s.title</h4></a>
+                                <p class="pull-right">@s.rating</p>
+                                <p>
+                                    @for (int i = 0; i < Convert.ToInt32(s.rating) / 2; i++)
+                                    {
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                        j++;
+                }
+                }
+                else
+                {int k=0;
+                    foreach (Season s in Model)
+                    {
+                        if(k==0)
+                    { <ul class="nav nav-tabs" style="margin-top: 2%; margin-bottom: 2%">
+            <li><h4 style="color:#337AB7"><strong>SEASONS</strong></h4></li>
+
+        </ul>}
+                        string g = "gallery";
+            <div class="col-md-3 portfolio-item">
+               
+                <a class="fancybox-thumb" rel="@(g+"s_"+s.id)" href="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_1.jpg")" title="@s.title (@s.cast)">
+                    <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_1.jpg")" alt="">
+                </a>
+                    <div class="hidden">
+                        <a class="fancybox-thumb" rel="@(g + "s_" + s.id)" href="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_2.jpg")" title="@s.title (@s.cast)">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_2.jpg")" alt="">
+
+                        </a>
+                        <a class="fancybox-thumb" rel="@(g + "s_" + s.id)" href="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_3.jpg")" title="@s.title (@s.cast)">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/s_"+s.title.Trim()+"_img_3.jpg")" alt="">
+
+                        </a>
+                    </div>
+                            <div class="ratings">
+                                <a href='@string.Format("/Description/Desc_Season?s={0}", s.id)'><h4>@s.title</h4></a>
+                                <p class="pull-right">@s.rating</p>
+                                <p>
+                                    @for (int i = 0; i < Convert.ToInt32(s.rating) / 2; i++)
+                                    {
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                        k++;
+                }
+                }
+                
+            }
+        </div>
+         }
+         
+         @if (Model is IEnumerable<Game> || ViewBag.entity == "All")
+         {
+             int j = 0;
+             <div class="row">
+
+                 @{
+             if (ViewBag.game != null)
+             {
+                 foreach (Game s in ViewBag.game)
+                 {
+                     if(j==0)
+                    { <ul class="nav nav-tabs" style="margin-top: 2%; margin-bottom: 2%">
+            <li><h4 style="color:#337AB7"><strong>GAMES</strong></h4></li>
+
+        </ul>}
+                     string g = "gallery";
+            <div class="col-md-3 portfolio-item">
+               
+                    <a class="fancybox-thumb" rel="@(g+"g_"+s.id)" href="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_1.jpg")" title="@s.title">
+                        <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_1.jpg")" alt="">
+                    </a>
+                    <div class="hidden">
+                        <a class="fancybox-thumb" rel="@(g + "g_" + s.id)" href="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_2.jpg")" title="@s.title">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_2.jpg")" alt="">
+
+                        </a>
+                        <a class="fancybox-thumb" rel="@(g + "g_" + s.id)" href="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_3.jpg")" title="@s.title">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_3.jpg")" alt="">
+
+                        </a>
+                    </div>
+                         <div class="ratings">
+                             <a href='@string.Format("/Description/Desc_Game?s={0}", s.id)'><h4>@s.title</h4></a>
+                             <p class="pull-right">@s.rating</p>
+                             <p>
+                                 @for (int i = 0; i < Convert.ToInt32(s.rating) / 20; i++)
+                                 {
+                                     <span class="glyphicon glyphicon-star"></span>
+                                 }
+                             </p>
+                         </div>
+                     </div>
+                     j++;
+                 }
+             }
+             else
+             {int k=0;
+                 foreach (Game s in Model)
+                 {
+                     if(k==0)
+                    { <ul class="nav nav-tabs" style="margin-top: 2%; margin-bottom: 2%">
+            <li><h4 style="color:#337AB7"><strong>GAMES</strong></h4></li>
+
+        </ul>}
+                     string g = "gallery";
+            <div class="col-md-3 portfolio-item">
+               
+                <a class="fancybox-thumb" rel="@(g+"g_"+s.id)" href="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_1.jpg")" title="@s.title ">
+                    <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_1.jpg")" alt="">
+                </a>
+                    <div class="hidden">
+                        <a class="fancybox-thumb" rel="@(g + "g_" + s.id)" href="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_2.jpg")" title="@s.title ">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_2.jpg")" alt="">
+
+                        </a>
+                        <a class="fancybox-thumb" rel="@(g + "g_" + s.id)" href="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_3.jpg")" title="@s.title ">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/g_"+s.title.Trim()+"_img_3.jpg")" alt="">
+
+                        </a>
+                    </div>
+                         <div class="ratings">
+                             <a href='@string.Format("/Description/Desc_Game?s={0}", s.id)'><h4>@s.title</h4></a>
+                             <p class="pull-right">@s.rating</p>
+                             <p>
+                                 @for (int i = 0; i < Convert.ToInt32(s.rating) / 20; i++)
+                                 {
+                                     <span class="glyphicon glyphicon-star"></span>
+                                 }
+                             </p>
+                         </div>
+                     </div>
+                     k++;
+                 }
+             }
+
+                 }
+             </div>
+         }
+         
+         @if (Model is IEnumerable<Song> || ViewBag.entity == "All")
+         {
+             int j = 0;
+             <div class="row">
+
+                 @{
+             if (ViewBag.song != null)
+             {
+                 foreach (Song s in ViewBag.song)
+                 {
+                     
+                     if(j==0)
+                    { <ul class="nav nav-tabs" style="margin-top: 2%; margin-bottom: 2%">
+            <li><h4 style="color:#337AB7"><strong>SONGS</strong></h4></li>
+
+        </ul>}
+                   string g = "gallery";
+            <div class="col-md-3 portfolio-item">
+               
+                <a class="fancybox-thumb" rel="@(g+"so_"+s.id)" href="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_1.jpg")" title="@s.title (@s.artist)">
+                    <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_1.jpg")" alt="">
+                </a>
+                    <div class="hidden">
+                        <a class="fancybox-thumb" rel="@(g + "so_" + s.id)" href="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_2.jpg")" title="@s.title (@s.artist)">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_2.jpg")" alt="">
+
+                        </a>
+                        <a class="fancybox-thumb" rel="@(g + "so_" + s.id)" href="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_3.jpg")" title="@s.title (@s.artist)">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_3.jpg")" alt="">
+
+                        </a>
+                    </div>
+                           <div class="ratings">
+                               <a href='@string.Format("/Description/Desc_Song?s={0}", s.id)'><h4>@s.title</h4></a>
+  
+                           </div>
+                       </div>
+                     j++;
+                 }
+             }
+             else
+             {int k=0;
+                 foreach (Song s in Model)
+                 {
+                     if(k==0)
+                    { <ul class="nav nav-tabs" style="margin-top: 2%; margin-bottom: 2%">
+            <li><h4 style="color:#337AB7"><strong>SONGS</strong></h4></li>
+
+        </ul>}
+                     string g = "gallery";
+            <div class="col-md-3 portfolio-item">
+               
+                <a class="fancybox-thumb" rel="@(g+"so_"+s.id)" href="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_1.jpg")" title="@s.title (@s.artist)">
+                    <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_1.jpg")" alt="">
+                </a>
+                    <div class="hidden">
+                        <a class="fancybox-thumb" rel="@(g + "so_" + s.id)" href="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_2.jpg")" title="@s.title (@s.artist)">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_2.jpg")" alt="">
+
+                        </a>
+                        <a class="fancybox-thumb" rel="@(g + "so_" + s.id)" href="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_3.jpg")" title="@s.title (@s.artist)">
+                            <img class="img-thumbnail img-responsive" src="@Url.Content("~/Content/images/so_"+s.title.Trim()+"_img_3.jpg")" alt="">
+
+                        </a>
+                    </div>
+                           <div class="ratings">
+                               <a href='@string.Format("/Description/Desc_Song?s={0}", s.id)'><h4>@s.title</h4></a>
+  
+                           </div>
+                       </div>
+                     k++;
+                 }
+             }
+
+                 }
+             </div>
+         }
+    </div>
+</body>
+
+
+@*<script src="~/js/jquery.js"></script>
+
+<script src="~/js/bootstrap.js"></script>*@

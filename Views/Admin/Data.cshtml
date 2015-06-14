@@ -1,0 +1,258 @@
+﻿@{
+    Layout = "~/Views/Admin/Layout.cshtml";
+}
+@using Project.Models
+<!DOCTYPE html>
+<html>
+
+<body>
+   
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="content-box-large">
+                            @if (Model is List<Movie>)
+                            { <div class="panel-heading">
+                                  @{
+                                string url="/Admin/DeleteMovie/";
+                                       string url2="/Admin/EditMovie/";
+                                  }
+                                <div class="panel-title">Movies</div>
+
+                               
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title</th>
+                                                <th>Director</th>
+                                                <th>Cast</th>
+                                                <th>Genre</th>
+                                                <th>Downloads</th>
+                                                <th>Description</th>
+                                                <th>Rating</th>
+                                                <th>Release Date</th>
+                                                
+                                                <th>Trailer URL</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach(Movie m in Model)
+                                {
+                                        <tr>
+                                            <td class="col-md-1">@m.id</td>
+                                            <td class="col-md-1">@m.title</td>
+                                            <td class="col-md-1">@m.director</td>
+                                            <td class="col-md-1">@m.cast</td>
+                                            <td class="col-md-1">@m.genre</td>
+                                            <td class="col-md-1">@m.dCount</td>
+                                            <td data-toggle="tooltip" data-placement="right" title="@m.description" style="text-overflow :ellipsis; white-space: nowrap; overflow: hidden; max-width: 30px;">@m.description</td>
+                                            <td class="col-md-1">@m.rating</td>
+                                            <td class="col-md-1">@m.releaseDate</td>
+                                           <td class="col-md-1">@m.trailerUrl</td>
+                                            <td class="col-md-2">
+                                                <h4>
+                                                    <a href="@Url.Content(url2+m.id)" data-rel="collapse">
+                                                        <i class="glyphicon glyphicon-edit"></i>
+                                                    </a>
+                                                    <a href="@Url.Content(url+m.id)" data-rel="reload"><i class="glyphicon glyphicon-trash"></i></a>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        }
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+
+                            }
+                            
+                            else if(Model is List<Season>)
+                            {
+                                <div class="panel-heading">
+                                    @{
+                                string url1="/Admin/DeleteSeason/";
+                                string url3="/Admin/EditSeason/";
+                                    }
+                                <div class="panel-title">Seasons</div>
+
+                               
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title</th>
+                                                <th>Director</th>
+                                                <th>Cast</th>
+                                                <th>Genre</th>
+                                                <th>Downloads</th>
+                                                <th>Description</th>
+                                                <th>Rating</th>
+                                               
+                                                <th>Trailer URL</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach(Season m in Model)
+                                {
+                                        <tr>
+                                            <td class="col-md-1">@m.id</td>
+                                            <td class="col-md-1">@m.title</td>
+                                            <td class="col-md-1">@m.director</td>
+                                            <td class="col-md-1">@m.cast</td>
+                                            <td class="col-md-1">@m.genre</td>
+                                            <td class="col-md-1">@m.dCount</td>
+                                            <td data-toggle="tooltip" data-placement="right" title="@m.description" style="text-overflow :ellipsis; white-space: nowrap; overflow: hidden; max-width: 30px;">@m.description</td>
+                                            <td class="col-md-1">@m.rating</td>
+                                           <td class="col-md-1">@m.trailerUrl</td>
+                                            <td class="col-md-2">
+                                                <h4>
+                                                    <a href="@Url.Content(url3+m.id)" data-rel="collapse">
+                                                        <i class="glyphicon glyphicon-edit"></i>
+                                                    </a>
+                                                    <a href="@Url.Content(url1+m.id)" data-rel="reload"><i class="glyphicon glyphicon-trash"></i></a>
+                                                </h4> 
+                                             </td>
+                                        </tr>
+                                        }
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+
+                            }
+                            
+                            else if(Model is List<Game>)
+                            {
+                                <div class="panel-heading">
+                                  @{
+                                string url="/Admin/DeleteGame/";
+                                       string url2="/Admin/EditGame/";
+                                  }
+                                <div class="panel-title">Games</div>
+
+                               
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title</th>
+                                                <th>Developer</th>
+                                                
+                                                <th>Genre</th>
+                                                <th>Description</th>
+                                                <th>Rating</th>
+                                                <th>Release Date</th>
+                                               
+                                                <th>Trailer URL</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach(Game m in Model)
+                                {
+                                        <tr>
+                                            <td class="col-md-1">@m.id</td>
+                                            <td class="col-md-1">@m.title</td>
+                                            <td class="col-md-1">@m.developer</td>
+                                         
+                                            <td class="col-md-1">@m.genre</td>
+                                            <td data-toggle="tooltip" data-placement="right" title="@m.description" style="text-overflow :ellipsis; white-space: nowrap; overflow: hidden; max-width: 30px;">@m.description</td>
+                                            <td class="col-md-1">@m.rating</td>
+                                            <td class="col-md-1">@m.releaseDate</td>
+                                           
+                                            <td class="col-md-1">@m.trailerUrl</td>
+                                            <td class="col-md-2">
+                                                <h4>
+                                                    <a href="@Url.Content(url2+m.id)" data-rel="collapse">
+                                                        <i class="glyphicon glyphicon-edit"></i>
+                                                    </a>
+                                                    <a href="@Url.Content(url+m.id)" data-rel="reload"><i class="glyphicon glyphicon-trash"></i></a>
+                                                </h4>
+                                            </td>
+                                                </tr>
+                                }
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                            }
+                            
+                            else
+                            {
+                                <div class="panel-heading">
+                                  @{
+                                string url="/Admin/DeleteSong/";
+                                       string url2="/Admin/EditSong/";
+                                  }
+                                <div class="panel-title">Songs</div>
+
+                               
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title</th>
+                                                <th>Artist</th>
+                                                
+                                                <th>Genre</th>
+                                               
+                                               
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach(Song m in Model)
+                                {
+                                        <tr>
+                                            <td class="col-md-1">@m.id</td>
+                                            <td class="col-md-1">@m.title</td>
+                                            <td class="col-md-1">@m.artist</td>
+                                         
+                                            <td class="col-md-1">@m.genre</td>
+                                            
+                                            @*<td data-toggle="tooltip" data-placement="right" title="@m.audioUrl">@m.audioUrl</td>
+                                            <td class="col-md-1">@m.imageUrl</td>
+                                            <td class="col-md-1">@m.songUrl</td>*@
+                                            <td class="col-md-2">
+                                                <h4>
+                                                    <a href="@Url.Content(url2+m.id)" data-rel="collapse">
+                                                        <i class="glyphicon glyphicon-edit"></i>
+                                                    </a>
+                                                    <a href="@Url.Content(url+m.id)" data-rel="reload"><i class="glyphicon glyphicon-trash"></i></a>
+                                                </h4>
+                                            </td>
+                                                </tr>
+                                }
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                   
+               
+                
+               
+
+                </div>
+
+                </div>
+              
+</body>
+</html>

@@ -1,0 +1,334 @@
+﻿@using Project.Models
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Description</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+  
+    <link href="~/Content/full-slider.css" rel="stylesheet">
+
+    <link href="~/Content/cols.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+
+    
+
+    <script>
+        $(document).ready(function () {
+            $(".various").fancybox({
+                maxWidth: 800,
+                maxHeight: 600,
+                fitToView: false,
+                width: '70%',
+                height: '70%',
+                autoSize: false,
+                closeClick: false,
+                openEffect: 'none',
+                closeEffect: 'none'
+               
+            });
+        });
+    </script>
+    
+</head>
+
+<body style="background-image:url('/Content/images/bg.jpg')">
+    @if (TempData["Liked"] != null)
+    {
+        <script language="javascript">
+    alert('@TempData["Liked"]');
+        </script>
+    }
+
+      
+
+
+        <div class="container">
+            <div class=" single_top">
+                
+                    <div class="img-thumbnail" style="background-color:#000;border:1px solid #000">
+                        @if(Model is Movie)
+                        {<img class="img-responsive" src="@Url.Content("~/Content/images/m_"+Model.title.Trim()+"_img_1.jpg")" alt="">
+                        }
+                        else if(Model is Season)
+                        {
+                            <img class="img-responsive" src="@Url.Content("~/Content/images/s_"+Model.title.Trim()+"_img_1.jpg")" alt="">
+                        }
+                        else if (Model is Song)
+                        {
+                            <img class="img-responsive" src="@Url.Content("~/Content/images/so_"+Model.title.Trim()+"_img_1.jpg")" alt="">
+                        }
+                        else
+                        {
+                           <img class="img-responsive" src="@Url.Content("~/Content/images/g_"+Model.title.Trim()+"_img_1.jpg")" alt="">
+                         
+                        }
+                                                                                                                                    
+                    <div class="caption-full" style="color:#ECDDDD">
+                        @*<h4 class="pull-right">@Model.rating</h4>*@
+                        <h4>
+                            <a href="#">@Model.title</a>
+                        </h4>
+                        <h5 style="color:#337AB7">@Model.genre</h5>
+                       @if(Model is Song)
+                       {
+                           <p>@Model.artist</p>
+                       }
+                       else{ <p>@Model.description</p>}
+                       
+                        @if (Model is Movie || Model is Season)
+                        { <p> <strong style="color:#337AB7">Director :</strong> @Model.director</p>
+                        <p> <strong style="color:#337AB7">Cast :</strong> @Model.cast</p>
+                        }
+                         @if(Model is Game)
+                         {
+                             <p> <strong style="color:#337AB7">Developer :</strong> @Model.developer</p>
+                         }                                                                
+                        @if(Model is Movie || Model is Game)
+                        {<p style="color:#337AB7">Release Date : @Model.releaseDate</p>}
+                        
+                                                                                
+                    </div>
+                    <div class="ratings" style="color:#337AB7">
+                        @if(Model is Movie || Model is Season)
+                        {<p>IMDB Rating : @Model.rating</p>
+                        <p>
+                            @for (int i = 0; i < Convert.ToInt32(Model.rating) / 2; i++)
+                            {
+                                <span class="glyphicon glyphicon-star" style="color:#fff"></span>
+                            }
+                        </p>
+                        }
+                        @if(Model is Game)
+                        {
+                            <p>MetaCritic Rating : @Model.rating</p>
+                        <p>
+                            @for (int i = 0; i < Convert.ToInt32(Model.rating) / 20; i++)
+                            {
+                                <span class="glyphicon glyphicon-star" style="color:#fff"></span>
+                            }
+                        </p>
+                        }
+                    </div>
+                     
+                    <div class="social-buttons pull-right">
+                        @if(Model is Movie)
+                        {
+                            <a class="various fancybox.iframe btn btn-fb" href="@Url.Content(Model.trailerUrl.Trim())"><i class="fa fa-eye"></i>Watch Trailer</a>
+
+                            <a href="@Url.Action("Download", "Description", new { id=Model.id,type="movie"})" class="btn btn-fb"><i class="fa fa-download"></i>Download</a>
+                        }
+                        else if(Model is Season)
+                        {
+                             <a class="various fancybox.iframe btn btn-fb" href="@Url.Content(Model.trailerUrl.Trim())"><i class="fa fa-eye"></i>Watch Trailer</a>
+
+                            <a href="@Url.Action("Download", "Description", new { id=Model.id,type="season"})" class="btn btn-fb"><i class="fa fa-download"></i>Download</a>
+
+                        }
+                        else if (Model is Game)
+                        {
+                             <a class="various fancybox.iframe btn btn-fb" href="@Url.Content(Model.trailerUrl.Trim())"><i class="fa fa-eye"></i>Watch Trailer</a>
+
+                            <a href="@Url.Action("Download", "Description", new { id=Model.id,type="game"})" class="btn btn-fb"><i class="fa fa-download"></i>Download</a>
+
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Download", "Description", new { id=Model.id,type="song"})" class="btn btn-fb"><i class="fa fa-download"></i>Download</a>
+
+                        }
+                    </div>
+                        @if (Model is Song)
+                        {
+                            <audio controls>
+
+                                <source src="@Url.Content("~/Content/Songs/"+Model.title.Trim()+".mp3")" type="audio/mpeg" />
+                                @*<source src="/bootstrap-player/media/cusb-cyl2985d.mp3" type="audio/mpeg" />*@
+
+                            </audio>
+                        }
+                </div>
+
+               
+                @*@if (Model is Movie || Model is Season || Model is Game)
+                {<ul class="nav nav-tabs" style="margin-top:2%">
+                    <li><h4 style="color:#337AB7"><strong>TRAILER</strong></h4></li>
+
+                </ul>
+                <div align="center" class="embed-responsive embed-responsive-16by9" id="mydiv">
+                   
+                    <iframe src="@Url.Content(Model.trailerUrl)" frameborder=0 marginwidth=0 marginheight=0 scrolling=NO width=645 height=373></iframe>
+                    
+                    </div>
+                }*@
+                
+              
+
+                <ul class="nav nav-tabs">
+                    <li><h4 style="color:#337AB7"><strong>Comments</strong></h4></li>
+                    
+                </ul>
+                <br />
+                <div class="well" style="background-color: #121111; border: 1px solid #1B1B1B;color: #fff;">
+                    <div>
+                        @{
+                            foreach (var v in ViewBag.comments)
+                            {
+
+
+                                <div class="row" style="margin-left:1%; margin-right:1%">
+                                    @*<span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>*@
+
+                                    <h5><span class="glyphicon glyphicon-user"></span><strong>@v.username<span class="pull-right">@v.time</span></strong></h5>
+
+                                    @*<span class="pull-right">@v.time</span>*@
+                                    <p>@v.comment</p>
+                                    @if (Session["username"] != null)
+                                    {
+                                        string url = "/Description/Like?id=" + v.id + "&username=" + Session["username"].ToString();
+                                        <h4>
+                                            <span class="badge" style="background-color: #07477E">@v.likes</span>
+
+
+                                            <a href="@Url.Content(url)"> <span class="glyphicon glyphicon-thumbs-up" style="color: #07477E"> </span></a>
+
+                                        </h4>
+                                        @*<script>
+                                $('.glyphicon-thumbs-up').click(function () {
+                                    var c_id = $(this).prop('id');
+                                    var username=@Session["username"].ToString()
+                                    $.getJSON('/Description/CheckForLike?cid=' + c_id+'username='+username, function (data) {
+                                        if (data) {
+                                            $('.glyphicon-thumbs-down').show();
+                                            $('.glyphicon-thumbs-up').hide();
+                                        }
+                                        //else
+                                        //{
+                                        //    $('.glyphicon-thumbs-down').
+                                        //}
+
+                                    });
+                                });
+                                    </script>*@
+                                    }
+                                    <hr style="border-color:#474747"/>
+                                </div>
+
+
+                            }
+                        }
+                        @if (Session["username"] != null)
+                        {
+                            int i = Model.id;
+                            <form class="navbar navbar-form" action="/Description/PostComment" method="post">
+
+                                @Html.Hidden("entityId", i)
+                                @Html.Hidden("username", Session["username"])
+                                @{if (Model is Movie)
+                                { @Html.Hidden("entityType", "Movie");
+                                }
+                                else if (Model is Season)
+                                {@Html.Hidden("entityType", "Season");
+                                }
+                                else if (Model is Game)
+                                {
+                                    @Html.Hidden("entityType", "Game");
+                                }
+                                else
+                                {
+                                    @Html.Hidden("entityType", "Song");
+                                }
+                                }
+                                <textarea name="comment" style="width:100%; height:40%; margin-left:0px; color:#000; height:89px; border-style:groove; border-color:none" placeholder="Your comments" required></textarea><br /><br />
+                                <input type="submit" class="btn btn-fb" value="Comment" style="float:right;  box-sizing:border-box ;text-transform: uppercase; color:#fff" />
+                            </form>
+
+                            @*using (Html.BeginForm("PostComment", "Description", new { entityId = Model.id }, FormMethod.Post, new {@class="navbar navbar-form", @onsubmit="return validateForm()" }))
+                    {
+                        @Html.Hidden("username", Session["username"]);
+                        @Html.Hidden("entityType", "movie");
+                        @Html.TextArea("Comment", new { style = "width:100%; height:40%; margin-left:0px; height:89px; border-style:groove; border-color:none", placeholder = "Your comments" });
+
+                     <input type="submit" class="btn btn-fb" value="Comment" style="float:right;  box-sizing:border-box ;text-transform: uppercase; color:#fff" />
+                    }*@
+                        }
+                        else
+                        {
+                             <!-- Trigger the modal with a button -->
+                            <div class="row">
+                                <button type="button" class="btn btn-fb pull-right" data-toggle="modal" data-target="#myModal">Login to leave comment</button>
+                            </div>
+   
+                            
+                            
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="padding: 35px 50px; background-color: #25575D; color: white !important; text-align: center; font-size: 30px;">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+                                        </div>
+                                        <div class="modal-body" style="padding:40px 50px;">
+                                            <form role="form" action="/Home/Login" method="post">
+                                                <div class="form-group">
+                                                    <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                                                    <input type="text" class="form-control" name="username" placeholder="Enter username">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                                                    <input type="password" class="form-control" name="password" placeholder="Enter password">
+                                                </div>
+
+                                                <button type="submit" class="btn btn-fb btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer" style="background-color: #f9f9f9;">
+                                            <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                            <p>Not a member? <a href="/Register/Register">Sign Up</a></p>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+    
+                       
+            <div class="clearfix"> </div>
+        </div>
+        <!-- /.container -->
+        <!-- /.container -->
+        <!-- jQuery -->
+        @*<script src="~/js/jquery.js"></script>
+        
+        <script src="~/js/bootstrap.js"></script>*@
+
+
+  
+
+</body>
+</html>

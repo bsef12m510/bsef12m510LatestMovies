@@ -1,0 +1,106 @@
+﻿@model Project.Models.Song
+
+@{
+    ViewBag.Title = "EditSong";
+    Layout = "~/Views/Admin/Layout.cshtml";
+}
+@using Project.Models
+<body>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box-large">
+                    <div class="panel-heading">
+                        <div class="panel-title">Update Song</div>
+
+
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" action="/Admin/SongEdited" method="post" enctype="multipart/form-data">
+                            @Html.Hidden("id", @Model.id)
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputEmail3" name="title" value="@Model.title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-2 control-label">Artist</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputPassword3" name="artist" value="@Model.artist">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Genre</label>
+                                <div class="col-sm-3">
+                                    @*<input type="text" class="form-control" id="inputEmail3" placeholder="Genre" name="genre">*@
+                                    <select name="genre">
+                                       @foreach (Category c in ViewBag.genres)
+                                                {
+                                                if (Model.genre.Trim() == c.genre.Trim())
+                                                {
+                                                    <option value="@c.genre.Trim()" selected>@c.genre.Trim()</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@c.genre.Trim()">@c.genre.Trim()</option>
+                                                }
+
+                                            }
+                                    </select>
+
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Upload Image 1</label>
+                                <div class="col-md-10">
+                                    <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image1">
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Upload Image 2</label>
+                                <div class="col-md-10">
+                                    <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image2">
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Upload Image 3</label>
+                                <div class="col-md-10">
+                                    <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image3">
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Upload torrent</label>
+                                <div class="col-md-10">
+                                    <input type="file" accept=".torrent" class="btn btn-default" id="exampleInputFile2" name="audioUrl">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Upload song</label>
+                                <div class="col-md-10">
+                                    <input type="file" accept=".mp3" class="btn btn-default" id="exampleInputFile2" name="songUrl" >
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

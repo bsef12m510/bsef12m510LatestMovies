@@ -1,0 +1,459 @@
+﻿@{
+    Layout = "~/Views/Admin/Layout.cshtml";
+}
+@using Project.Models
+<!DOCTYPE html>
+<html>
+
+<body>
+    @if (ViewData["Message"] != null)
+    {
+        <script language="javascript">
+    alert('@ViewData["Message"]');
+        </script>
+    }
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="content-box-large">
+                            @if(ViewBag.type=="movie")
+                            { <div class="panel-heading">
+                                <div class="panel-title">Add Movie</div>
+
+                                
+                            </div>
+                            <div class="panel-body">
+                                <form class="form-horizontal" role="form"  action="/Admin/Save" method="post" enctype="multipart/form-data">
+                                    @Html.Hidden("entityType", "movie");
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputEmail3" placeholder="Title" name="title" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">Director</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputPassword3" placeholder="Director" name="director" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Cast</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputEmail3" placeholder="Cast" name="cast" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Genre</label>
+                                        <div class="col-sm-3">
+                                            @*<input type="text" class="form-control" id="inputEmail3" placeholder="Genre" name="genre">*@
+                                        <select name="genre">
+                                         
+                                            @foreach(Category c in ViewBag.movieGenres)
+                                            {
+                                                <option value="@c.genre.Trim()">@c.genre.Trim()</option>
+                                            }
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Release Date</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control" id="inputEmail3" placeholder="Release Date" name="releaseDate" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Description</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" placeholder="Textarea" rows="3" name="description" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Rating</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" id="inputEmail3" placeholder="Rating" name="rating" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 1</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image1" required>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 2</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image2" required>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 3</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image3" required >
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload torrent</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept=".torrent" class="btn btn-default" id="exampleInputFile2" name="videoUrl" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">Trailer Url</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputPassword3" placeholder="trailer url" name="trailerUrl" required>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Movie</label>
+                                        <div class="col-md-10">
+                                            <input type="file" class="btn btn-default" id="exampleInputFile1">
+                                            <p class="help-block">
+                                                some help text here.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Trailer</label>
+                                        <div class="col-md-10">
+                                            <input type="file" class="btn btn-default" id="exampleInputFile1">
+                                            <p class="help-block">
+                                                some help text here.
+                                            </p>
+                                        </div>
+                                    </div>*@
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            }
+                            else if(ViewBag.type=="season")
+                            {
+                               <div class="panel-heading">
+                                <div class="panel-title">Add Season</div>
+
+                                <div class="panel-options">
+                                    <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+                                    <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <form class="form-horizontal" role="form"  action="/Admin/Save" method="post" enctype="multipart/form-data">
+                                    @Html.Hidden("entityType", "season");
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputEmail3" placeholder="Title" name="title" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">Director</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputPassword3" placeholder="Director" name="director" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Cast</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputEmail3" placeholder="Cast" name="cast" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Genre</label>
+                                        <div class="col-sm-3">
+                                            @*<input type="text" class="form-control" id="inputEmail3" placeholder="Genre" name="genre">*@
+                                        <select name="genre">
+                                            @*<option value="Action" selected>Action</option>
+                                            <option value="Comedy">Comedy</option>
+                                            <option value="Drama">Drama</option>
+                                            <option value="War">War</option>
+                                            <option value="Sports">Crime</option>*@
+                                            @foreach (Category c in ViewBag.seasonGenres)
+                                            {
+                                                <option value="@c.genre.Trim()">@c.genre.Trim()</option>
+                                            }
+                                        </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Description</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" placeholder="Textarea" rows="3" name="description" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Rating</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputEmail3" placeholder="Rating" name="rating" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Rating</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputEmail3" placeholder="Rating" name="rating" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 1</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image1" required>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 2</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image2" required>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 3</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image3" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload torrent</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept=".torrent" class="btn btn-default" id="exampleInputFile2" name="videoUrl" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">Trailer Url</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputPassword3" placeholder="trailer url" name="trailerUrl" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            }
+                            
+                            else if(ViewBag.type=="game")
+                            {
+                                <div class="panel-heading">
+                                <div class="panel-title">Add Game</div>
+
+                                
+                            </div>
+                            <div class="panel-body">
+                                <form class="form-horizontal" role="form"  action="/Admin/Save" method="post" enctype="multipart/form-data">
+                                    @Html.Hidden("entityType", "game");
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputEmail3" placeholder="Title" name="title" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">Developer</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputPassword3" placeholder="Director" name="developer" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Genre</label>
+                                        <div class="col-sm-3">
+                                          
+                                        <select name="genre">
+                                     
+                                            @foreach(Category c in ViewBag.gameGenres)
+                                            {
+                                                <option value="@c.genre.Trim()">@c.genre.Trim()</option>
+                                            }
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Release Date</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputEmail3" placeholder="Release Date" name="releaseDate" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Description</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" placeholder="Textarea" rows="3" name="description" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Rating</label>
+                                        <div class="col-sm-10">
+                                            <input type="number"  min="0" max="100" class="form-control" id="inputEmail3" placeholder="Rating" name="rating" required>
+                                        </div>
+                                    </div>
+                                    @*<div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Rating</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputEmail3" placeholder="Rating" name="rating" required>
+                                        </div>
+                                    </div>*@
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 1</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image1" required>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 2</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image2" required>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 3</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image3" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload torrent</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept=".torrent" class="btn btn-default" id="exampleInputFile2" name="videoUrl" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">Trailer Url</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputPassword3" placeholder="trailer url" name="trailerUrl" required>
+                                        </div>
+                                    </div>
+
+                                   
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            }
+                            else
+                            {
+                                 <div class="panel-heading">
+                                <div class="panel-title">Add Song</div>
+                            </div>
+                            <div class="panel-body">
+                                <form class="form-horizontal" role="form"  action="/Admin/Save" method="post" enctype="multipart/form-data">
+                                    @Html.Hidden("entityType", "song");
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputEmail3" placeholder="Title" name="title" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">Artist</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputPassword3" placeholder="Director" name="artist" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Genre</label>
+                                        <div class="col-sm-3">
+                                          
+                                        <select name="genre">
+                                            @foreach (Category c in ViewBag.songGenres)
+                                            {
+                                                <option value="@c.genre.Trim()">@c.genre.Trim()</option>
+                                            }
+                                        </select>
+                                        </div>
+                                    </div>
+                                   
+                                    @*<div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Rating</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputEmail3" placeholder="Rating" name="rating" required>
+                                        </div>
+                                    </div>*@
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 1</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image1" required>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 2</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image2" required>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload Image 3</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept="image/jpeg" class="btn btn-default" id="exampleInputFile1" name="image3" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload torrent</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept=".torrent" class="btn btn-default" id="exampleInputFile2" name="audioUrl" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Upload song</label>
+                                        <div class="col-md-10">
+                                            <input type="file" accept=".mp3" class="btn btn-default" id="exampleInputFile2" name="songUrl" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            }
+                        </div>
+                    </div>
+
+                   
+                </div>
+                
+                
+
+                <!--  Page content -->
+            </div>
+        @*</div>
+    </div>*@
+   
+</body>
+</html>

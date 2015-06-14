@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "~/Views/Admin/Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+
+<body>
+    @if (ViewData["Message"] != null)
+    {
+        <script language="javascript">
+    alert('@ViewData["Message"]');
+        </script>
+    }
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box-large">
+                    <div class="panel-heading">
+                        <div class="panel-title">Add User</div>
+
+                        <div class="panel-options">
+                            <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+                            <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" method="post" action="/Admin/PostComment">
+                            @Html.Hidden("username","ADMIN")
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Entity Type</label>
+                                <div class="col-sm-3">
+                                    @*<input type="text" class="form-control" id="inputEmail3" placeholder="Genre" name="genre">*@
+                                    <select name="entityType">
+                                        <option value="MOVIE" selected>MOVIE</option>
+                                        <option value="SEASON">SEASON</option>
+                                        <option value="SONG" selected>SONG</option>
+                                        <option value="GAME">GAME</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-2 control-label">Entity Id</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="inputPassword3" placeholder="username" name="entityId" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Comment</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" placeholder="Textarea" rows="3" name="comment" required></textarea>
+                                </div>
+                            </div>
+                            
+                           
+                               
+                           
+
+
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+        <!--  Page content -->
+    </div>
+    @*</div>
+        </div>*@
+
+</body>
+</html>

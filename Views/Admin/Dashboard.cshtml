@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Views/Admin/Layout.cshtml";
+}
+
+@using Project.Models
+
+<!DOCTYPE html>
+<html>
+
+<body>
+   
+            <div class="col-md-10">
+                <div class="row ">
+                   @foreach(Suggestion s in Model)
+                   {    
+                     <div class="col-md-10 center-block">
+                         <div class="content-box-header panel-heading" style="word-wrap: break-word;">
+                             <div class="panel-title "><strong>@s.title</strong></div>
+
+                             <div class="panel-options" style="font-size:14px">
+
+                                 @s.time
+                             </div>
+                         </div>
+                        <div class="content-box-large box-with-header">
+                            @s.username suggests : <br /><br />
+                            <div style="word-wrap: break-word;">  @s.suggestion</div>
+                             <br /><br />
+                        </div>
+                    </div>
+                   }
+                </div>
+                
+                
+                 
+            </div>
+      
+</body>
+</html>

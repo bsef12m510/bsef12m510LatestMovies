@@ -1,0 +1,528 @@
+﻿@using Project.Models
+
+@{
+    MyDataEntities db = new MyDataEntities();
+    var movieGenres = db.Category.Where(x => x.category.Trim() == "Movie");
+    var seasonGenres = db.Category.Where(x => x.category.Trim() == "Season");
+    var gameGenres = db.Category.Where(x => x.category.Trim() == "Game");
+    var songGenres = db.Category.Where(x => x.category.Trim() == "Song"); 
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    
+    <title>@ViewBag.Title</title>
+ 
+   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+   
+    <!-- Bootstrap Core CSS -->
+    <script src="~/Scripts/jquery.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+    <script src="~/js/bootstrap.min.js"></script>
+  
+   
+   
+    <link href="~/Content/cols.css" rel="stylesheet">
+    <link href="~/Content/css2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+    
+    <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+    <link href="~/Content/jquery.fancybox-buttons.css" rel="stylesheet" />
+    <link href="~/Content/jquery.fancybox-thumbs.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.fancybox.js"></script>
+    <script src="~/Scripts/jquery.fancybox-buttons.js"></script>
+    <script src="~/Scripts/jquery.fancybox-media.js"></script>
+    <script src="~/Scripts/jquery.fancybox-thumbs.js"></script>
+
+    <!-- <script src="~/Scripts/jquery.fancybox.pack.js"></script>-->
+
+
+    <script>
+        $(document).ready(function () {
+
+            $(".fancybox-thumb").fancybox({
+
+                helpers: {
+                    title: {
+                        type: 'outside'
+                    },
+                    thumbs: {
+                        width: 100,
+                        height: 100
+                    }
+                }
+            });
+
+
+        });
+    </script>
+    <style type="text/css">
+        .fancybox-skin {
+            background-color: #1d1d1d !important; /* or whatever */
+        }
+    </style>
+</head>
+<body>
+
+  
+ 
+
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation" style="margin-bottom:0px;background-color:#000">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Home" style="padding-bottom:0px;padding-top:0px"><img class="img-responsive" src="~/Content/images/logo.jpg" /></a>
+            </div>
+            @{
+                string movieUrl = "/Browse_All/BrowseAll?entityType=movies&genre=";
+                string seasonUrl = "/Browse_All/BrowseAll?entityType=seasons&genre=";
+                string gameUrl = "/Browse_All/BrowseAll?entityType=games&genre=";
+                string songUrl = "/Browse_All/BrowseAll?entityType=songs&genre=";
+            }
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movies <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" style="background-color: rgba(255, 255, 255, 0.8)">
+
+                            @foreach (Category c in movieGenres)
+                            {
+                                <li><a href="@Url.Content(movieUrl+c.genre.Trim())">@c.genre.Trim()</a></li>
+                                <li class="divider"></li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Seasons<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" style="background-color: rgba(255, 255, 255, 0.8)">
+
+                            @foreach (Category c in seasonGenres)
+                            {
+                                <li><a href="@Url.Content(seasonUrl+c.genre.Trim())">@c.genre.Trim()</a></li>
+                                <li class="divider"></li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Songs<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" style="background-color: rgba(255, 255, 255, 0.8)">
+                            @foreach (Category c in songGenres)
+                            {
+                                <li><a href="@Url.Content(songUrl+c.genre.Trim())">@c.genre.Trim()</a></li>
+                                <li class="divider"></li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Games<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" style="background-color: rgba(255, 255, 255, 0.8)">
+                            @foreach (Category c in gameGenres)
+                            {
+                                <li><a href="@Url.Content(gameUrl+c.genre.Trim())">@c.genre.Trim()</a></li>
+                                <li class="divider"></li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <a data-toggle="modal" href="#myModal1">Advanced Search</a>
+
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left" role="search" action="/Search/Search" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search" name="name" required>
+                    </div>
+                    @*<button type="submit" class="btn btn-default">Submit</button>*@
+
+                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </form>
+
+
+                @if (Session["username"] == null)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><p class="navbar-text">Already have an account?</p></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                            <ul id="login-dp" class="dropdown-menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Social links
+                                            <div class="social-buttons">
+                                                <a href="https://www.facebook.com/zeeshan.awan.71" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+                                                <a href="https://www.facebook.com/zeeshan.awan.71" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                                            </div>
+                                            Login
+                                            <form class="form" role="form" method="post" action="/Home/Login" accept-charset="UTF-8" id="login-nav">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Username" name="username" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name="password" required>
+                                                    <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                                </div>
+                                                @*<div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox"> keep me logged-in
+                                                    </label>
+                                                </div>*@
+                                            </form>
+                                        </div>
+                                        <div class="bottom text-center">
+                                            New here ? <a href="/Register/Register" id="myLink"><b>Join Us</b></a>
+
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>@Session["username"]</b> <span class="caret"></span></a>
+                            <ul id="login-dp" class="dropdown-menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <form class="form" role="form" method="post" action="/Profile/Profile" accept-charset="UTF-8">
+
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary btn-block">Profile</button>
+                                                </div>
+                                            </form>
+                                            <form class="form" role="form" method="post" action="/Home/Logout" accept-charset="UTF-8">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary btn-block">Logout</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+
+    @RenderBody()
+
+   
+    <hr>
+    @*<!-- Call to Action Section -->
+    <div class="container-fluid">
+        <div class="well">
+            <div class="row">
+                <div class="col-md-8">
+                    <p>For feedback and suggestions.</p>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-lg btn-default btn-block" href="#">Feedback</a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy;2000-2015. All rights reserved</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>*@
+
+    @*<section id="footer-sec">
+
+        <div class="container">
+            <div class="row  pad-bottom">
+                <div class="col-md-4">
+                    <h4> <strong>ABOUT COMPANY</strong> </h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                    <a href="#">read more</a>
+                </div>
+                <div class="col-md-4">
+                    <h4> <strong>SOCIAL LINKS</strong> </h4>
+                    <p>
+                        <a href="#"><i class="fa fa-facebook-square fa-3x"></i></a>
+                        <a href="#"><i class="fa fa-twitter-square fa-3x"></i></a>
+                        <a href="#"><i class="fa fa-linkedin-square fa-3x"></i></a>
+                        <a href="#"><i class="fa fa-google-plus-square fa-3x"></i></a>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h4> <strong>OUR LOCATION</strong> </h4>
+                    <p>
+                        234/JK , The Wondre Land, <br />
+                        Newyork Street Junction  <br />
+                        JUST USA -10909094
+                    </p>
+                    <a href="#" class="btn btn-primary">SEND QUERY</a>
+                </div>
+            </div>
+        </div>
+    </section>*@         
+
+    <section id="footer-sec" style="background-color:#000; color:#808080; padding:50px">
+
+        <div class="container">
+            <div class="row  pad-bottom">
+                <div class="col-md-4">
+                    <h4 style="color:#fff"> <strong>ABOUT COMPANY</strong> </h4>
+                    <p>
+                        Hello world
+                    </p>
+                    <a href="/About">read more</a>
+                </div>
+                <div class="col-md-4">
+                    <h4 style="color:#fff"> <strong>SOCIAL LINKS</strong> </h4>
+                    <p>
+                        <a href="https://www.facebook.com/zeeshan.awan.71"><i class="fa fa-facebook-square fa-3x"></i></a>
+                        <a href="https://www.facebook.com/zeeshan.awan.71"><i class="fa fa-twitter-square fa-3x"></i></a>
+                        <a href="https://www.facebook.com/zeeshan.awan.71"><i class="fa fa-linkedin-square fa-3x"></i></a>
+                        <a href="https://www.facebook.com/zeeshan.awan.71"><i class="fa fa-google-plus-square fa-3x"></i></a>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h4 style="color:#fff"> <strong>OUR LOCATION</strong> </h4>
+                    <p>
+                        Punjab University College of Information Technology, <br />
+                        Lahore  <br />
+                        Pakistan
+                    </p>
+                    <a href="/About" class="btn btn-primary">FEEDBACK</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal1" role="form">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content" style="background-color: #221F1F;color:#fff">
+                <div class="modal-header" style="padding:15px 15px;">
+                    <button type="button" id="close" class="close" data-dismiss="modal" style="color:#fff">&times;</button>
+                    <h4><span class="glyphicon glyphicon-search"></span> Search</h4>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+
+
+                    <form method="POST" action="/Search/Advanced"  accept-charset="UTF-8">
+                        <div class="input-group ">
+                            <input type="text" class="form-control" name="keyword" placeholder="Keyword" required>
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" id="search" type="submit">Search</button>
+                            </span>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <div class="selects-container">
+                                        <p>Type:</p>
+                                        <select name="type" style="color:#000" id="category">
+                                            <option value="ALL" selected="selected">All</option>
+                                            <option value="MOVIE">Movies</option>
+                                            <option value="SEASON">Seasons</option>
+                                            <option value="SONG">Songs</option>
+                                            <option value="GAME">Games</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="selects-container" id="genreContainer">
+                                        <p>Genre:</p>
+                                        <select name="genres" style="color:#000" id="genre">
+                                            <option value="" hidden></option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-10">
+                                    <div class="selects-container" id="ratingContainer">
+                                        <p>Rating:</p>
+                                        <select id="rating" name="ratings" style="color:#000"><option value="0" selected="selected">All</option><option value="9">9+</option><option value="8">8+</option><option value="7">7+</option><option value="6">6+</option><option value="5">5+</option><option value="4">4+</option><option value="3">3+</option><option value="2">2+</option><option value="1">1+</option></select>
+                                    </div>
+                                    <div class="selects-container" id="g_ratingContainer">
+                                        <p>Rating:</p>
+                                        <select id="g_rating" name="g_ratings" style="color:#000"><option value="0" selected="selected">All</option><option value="90">90+</option><option value="80">80+</option><option value="70">70+</option><option value="60">60+</option><option value="50">50+</option><option value="40">40+</option><option value="30">30+</option><option value="20">20+</option><option value="10">10+</option></select>
+                                    </div>
+                                    <div class="selects-container selects-container-last" id="artistContainer">
+                                        <p>Artist:</p> <select name="artists" style="color:#000" id="artist"><option value="" hidden></option></select>
+                                        </div>
+                                </div>
+                                <script>
+
+                                   
+
+                                    $(document).ready(function () {
+                                        $('#category').prop('selectedIndex', 0);
+                                        $('#genreContainer').hide();
+                                        $('#g_ratingContainer').hide();
+                                        $('#ratingContainer').hide();
+                                        $('#artistContainer').hide();
+                                       
+
+                                    });
+
+                                    $(function () {
+                                        $('#search').click(function () {
+                                            //$('#genre').empty();
+                                           // $('#genreContainer').hide();
+                                          //  $('#artistContainer').hide();
+                                           // $('#ratingContainer').hide();
+                                           // $('#g_ratingContainer').hide();
+                                           
+                                        })
+                                    });
+
+                                    $(function () {
+                                        $('#close').click(function () {
+                                            $('#genre').empty();
+                                            $('#genreContainer').hide();
+                                            $('#artistContainer').hide();
+                                            $('#ratingContainer').hide();
+                                            $('#g_ratingContainer').hide();
+                                            $('#category').prop('selectedIndex', 0);
+                                          
+                                        })
+                                    });
+
+                                    $(function () {
+                                        $('#cancel').click(function () {
+                                            $('#genre').empty();
+                                            $('#genreContainer').hide();
+                                            $('#artistContainer').hide();
+                                            $('#ratingContainer').hide();
+                                            $('#g_ratingContainer').hide();
+                                            $('#category').prop('selectedIndex', 0);
+                                        })
+                                    });
+
+    $(function () {
+        $('#category').change(function () {
+            var categoryId = $(this).val();
+            $.getJSON('/Search/GetGenres?cat=' + categoryId, function (genre) {
+                var genreSelect = $('#genre');
+                genreSelect.empty();
+               
+                $.each(genre, function (index, category) {
+                    genreSelect.append(
+                        $('<option/>')
+                            .attr('value', category.genre)
+                            .text(category.genre)
+                    );
+                });
+
+                $('#genre').prop('selectedIndex', 0);
+            });
+
+            if(categoryId==="MOVIE" || categoryId==="SEASON")
+            {
+                $('#g_ratingContainer').hide();
+                $('#artistContainer').hide();
+                $('#genreContainer').show();
+                $('#ratingContainer').show();
+
+            }
+            else if(categoryId==="SONG")
+            {
+                $.getJSON('/Search/GetSongArtists', function (artist) {
+                    var artistSelect = $('#artist');
+                    artistSelect.empty();
+                    //artistSelect.append(
+                    //        $('<option/>')
+                    //            .attr('value', '')
+                    //            .text('--Select Artist--'));
+                    $.each(artist, function (index, art) {
+                        artistSelect.append(
+                            $('<option/>')
+                                .attr('value',art)
+                                .text(art)
+                        );
+                    });
+                });
+                $('#artist').prop('selectedIndex', 0);
+                $('#g_ratingContainer').hide();
+                $('#ratingContainer').hide();
+                $('#genreContainer').show();
+                $('#artistContainer').show();
+            }
+            else if(categoryId==="GAME")
+            {
+                $('#artistContainer').hide();
+                $('#ratingContainer').hide();
+                $('#genreContainer').show();
+                $('#g_ratingContainer').show();
+            }
+            else
+            {
+                $('#artistContainer').hide();
+                $('#ratingContainer').hide();
+                $('#genreContainer').hide();
+                $('#g_ratingContainer').hide();
+            }
+        });
+    });
+
+
+                                </script>
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="submit" id="cancel" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

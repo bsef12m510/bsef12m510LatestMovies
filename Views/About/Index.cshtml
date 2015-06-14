@@ -1,0 +1,154 @@
+﻿
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>About</title>
+    <!-- Bootstrap Core CSS -->
+  
+    <script src="~/Scripts/jquery.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/full-slider.css" rel="stylesheet">
+
+    <link href="~/Content/cols.css" rel="stylesheet">
+    <link href="~/Content/css2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body style="background-image:url(/Content/images/bg.jpg)">
+
+   
+
+    <div class="container" style="color:#a09a9a ">
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    About
+                    <small>Suggestions and Contact</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li class="active">About</li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+     
+        <div class="row">
+            <div class="col-md-8">
+        
+                <div class="panel panel-primary" style="border-color:#2e2e2f">
+                    <div class="panel-heading" style="background-color:#1b1b1b ; border-color:#1e1e1f">
+                        <strong>Suggestions </strong>
+                    </div>
+                    <div class="panel-body" style="background-color:#2c2b2b">
+                        @if (Session["username"] != null)
+                        {
+                            <form role="form" action="/About/Suggest">
+                                <br />
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-circle-o-notch"></i></span>
+                                    <input type="text" class="form-control" placeholder="Title" name="title" required />
+                                </div>
+                                <div class="form-group input-group">
+                                    <textarea name="suggestion" placeholder="Your suggestions" rows="10" cols="110" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+                                </div>
+                                <input type="hidden" name="username" value="@Session["username"]" />
+                                <input type="submit" class="btn btn-success " value="Suggest" />
+                                <hr />
+
+                            </form>
+                        }
+                        else
+                        {
+                             <!-- Trigger the modal with a button -->
+                            <button type="button" class="btn btn-fb pull-right" data-toggle="modal" data-target="#myModal">Login to give suggestions</button>
+
+   <!-- Modal -->
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="padding:35px 50px;">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+                                        </div>
+                                        <div class="modal-body" style="padding:40px 50px;">
+                                            <form role="form" action="/Home/Login" method="post">
+                                                <div class="form-group">
+                                                    <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                                                    <input type="text" class="form-control" name="username" placeholder="Enter username" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                                                    <input type="password" class="form-control" name="password" placeholder="Enter password" required>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-fb btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                            <p>Not a member? <a href="/Register/Register">Sign Up</a></p>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+            <!-- Contact Details Column -->
+            <div class="col-md-4">
+                <h3>Contact Details</h3>
+                <p>
+                    Punjab University College of Information Technology<br>Lahore<br>
+                </p>
+                <p>
+                    <i class="fa fa-phone"></i>
+                    <abbr title="Phone">P</abbr>: (123) 456-7890
+                </p>
+                <p>
+                    <i class="fa fa-envelope-o"></i>
+                    <abbr title="Email">E</abbr>: <a href="mailto:zeeshanawan262@live.com">zeeshanawan262@live.com</a>
+                </p>
+                
+                <ul class="list-unstyled list-inline list-social-icons">
+                    <li>
+                        <a href="https://www.facebook.com/zeeshan.awan.71"><i class="fa fa-facebook-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/zeeshan.awan.71"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/zeeshan.awan.71"><i class="fa fa-twitter-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/zeeshan.awan.71"><i class="fa fa-google-plus-square fa-2x"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- /.row -->
+        </div>
+        <!-- /.row -->
+        <hr>
+    </div>
+</body>
+</html>

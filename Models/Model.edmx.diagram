@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b652b17681444df28f2747f42fdcffa5" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="DatabaseModel.Comment" Width="1.5" PointX="2.375" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Movie" Width="1.5" PointX="0.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Season" Width="1.5" PointX="2.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Suggestion" Width="1.5" PointX="7.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.UserComment" />
+        <EntityTypeShape EntityType="DatabaseModel.Category" Width="1.5" PointX="0.5" PointY="4" />
+        <EntityTypeShape EntityType="DatabaseModel.Game" Width="1.5" PointX="4.5" PointY="0.5" />
+        <EntityTypeShape EntityType="DatabaseModel.Song" Width="1.5" PointX="6.625" PointY="0.75" />
+        <EntityTypeShape EntityType="DatabaseModel.Likes" Width="1.5" PointX="4.125" PointY="4.25" />
+        <AssociationConnector Association="DatabaseModel.FK_Table_Comment" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
